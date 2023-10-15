@@ -1333,6 +1333,17 @@ class PipelineRun:
 
         _LOGGER.debug("conversation result %s", conversation_result)
 
+        speech: str = conversation_result.response.speech.get("plain", {}).get(
+            "speech", ""
+        )
+        import xml.etree.ElementTree
+        try:
+            conversation_result.response.speech["plain"]["speech"] = ''.join(xml.etree.ElementTree
+                                                                             .fromstring(speech).itertext())
+        except xml.etree.ElementTree.ParseError:
+            # probably not a SSML message - just skip
+            pass
+
         self.process_event(
             PipelineEvent(
                 PipelineEventType.INTENT_END,
