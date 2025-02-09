@@ -39,7 +39,7 @@ if TYPE_CHECKING:
     from .connection import ActiveConnection
 
 CLOSE_MSG_TYPES = {WSMsgType.CLOSE, WSMsgType.CLOSED, WSMsgType.CLOSING}
-AUTH_MESSAGE_TIMEOUT = 10  # seconds
+AUTH_MESSAGE_TIMEOUT = 30  # seconds
 
 
 _WS_LOGGER: Final = logging.getLogger(f"{__name__}.connection")
