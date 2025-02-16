@@ -583,6 +583,8 @@ class CastMediaPlayerEntity(CastDevice, MediaPlayerEntity):
     def media_pause(self) -> None:
         """Send pause command."""
         media_controller = self._media_controller()
+        if media_controller.status is None or media_controller.status.media_session_id is None:
+            return
         media_controller.pause()
 
     @api_error
@@ -590,6 +592,8 @@ class CastMediaPlayerEntity(CastDevice, MediaPlayerEntity):
     def media_stop(self) -> None:
         """Send stop command."""
         media_controller = self._media_controller()
+        if media_controller.status is None or media_controller.status.media_session_id is None:
+            return
         media_controller.stop()
 
     @api_error
